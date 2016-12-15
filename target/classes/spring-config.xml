@@ -10,13 +10,22 @@
                http://www.springframework.org/schema/tx
                http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
+
+
+
+    <!-- 1. jdbc配置文件 :  -->
+    <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+
     <!-- 1. 数据源 : DriverManagerDataSource -->
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/ssm1"/>
-        <property name="username" value="root"/>
-        <property name="password" value="guyu"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
     </bean>
 
     <!--
@@ -36,7 +45,6 @@ basePackage:指定sql映射文件/接口所在的包（自动扫描）
 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.guyu.ssm1.mapping"></property>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
     </bean>
 
     <!--

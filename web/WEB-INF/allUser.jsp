@@ -32,7 +32,7 @@
   <c:if test="${!empty listUser }">
     <c:forEach items="${listUser}" var="list">
       <tr>
-        <td>${list.username }</td>
+        <td>${list.userName }</td>
         <td>${list.age }</td>
 
       </tr>
